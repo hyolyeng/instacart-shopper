@@ -1,0 +1,16 @@
+{% extends "shoppers/base.html" %}
+
+{% block header %}
+{% endblock %}
+
+{% block content %}
+  <div class=container>
+    <form method="post">
+      {% csrf_token %}
+      <div class=welcome>Welcome Shopper!</div>
+      <div class=subtitle>Sign up to be a shopper now!</div>
+      <input type=email name=email required>
+      <input class="btn btn-primary" type="submit" value="Apply Now">
+    </form>
+  </div>
+{% endblock %}

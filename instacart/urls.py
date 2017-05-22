@@ -21,4 +21,7 @@ import shoppers.views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^shoppers/index$', shoppers.views.index, name='index'),
+    url(r'^shoppers/application_status/(?P<id>\d+)/$', shoppers.views.application_status, name='application_status'),
+    url(r'^shoppers/application', shoppers.views.application, name='application'),
+    url(r'^shoppers/background_check', shoppers.views.background_check, name='background_check'),
 ]

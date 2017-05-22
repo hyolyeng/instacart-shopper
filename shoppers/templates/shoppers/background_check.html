@@ -1,0 +1,14 @@
+{% extends "shoppers/base.html" %}
+
+{% block header %}
+{% endblock %}
+
+{% block content %}
+  <div class=container>
+    <form method="post">
+      {% csrf_token %}
+      <div class=background-check-info>OK to run background check for user {{ email }}?<div>
+      <input class="btn btn-primary" type="submit" value="OK">
+    </form>
+  </div>
+{% endblock %}
