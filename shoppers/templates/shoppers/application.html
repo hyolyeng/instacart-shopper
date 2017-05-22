@@ -1,12 +1,46 @@
 {% extends "shoppers/base.html" %}
 
 {% block header %}
+<style>
+
+.instructions {
+  padding: 20px;
+  font-size: 1.2em;
+}
+
+.fieldWrapper {
+  font-weight: 400;
+  font-size: 1.5em;
+  padding: 5px;
+}
+.fieldWrapper label {
+  width: 20%;
+  text-align: right;
+  font-weight: 400;
+}
+.fieldWrapper input {
+  width: 70%;
+  text-align: left;
+}
+</style>
 {% endblock %}
 
 {% block content %}
-    <h1>New Shopper Application for user {{ email }}<h1>
-    <form method="POST" class="post-form">{% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="save btn btn-default">Save</button>
-    </form>
+
+  <form method="POST">
+  {% csrf_token %}
+    <div class=instructions>
+      Please fill out the following information to apply to be a Instacart Shopper.
+    </div>
+    {% for field in form %}
+      <div class="fieldWrapper">
+        {{ field.errors }}
+        {{ field.label_tag }} {{ field }}
+        {% if field.help_text %}
+          <p class="help">{{ field.help_text|safe }}</p>
+        {% endif %}
+      </div>
+    {% endfor %}
+    <div><input class="btn btn-primary" type=submit value="Next" /></div>
+  </form>
 {% endblock %}

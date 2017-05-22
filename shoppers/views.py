@@ -34,7 +34,8 @@ def background_check(request):
 
 def application_status(request, id):
 	application = Application.objects.get(id=id)
-	return render(request, "shoppers/application_status.html", {'application': application})
+	status_str = [s for s in Application.APPLICATION_STEPS if s[0] == application.step][0][1]
+	return render(request, "shoppers/application_status.html", {'application': application, 'status': status_str})
 
 
 def index(request):

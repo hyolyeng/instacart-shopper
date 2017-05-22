@@ -1,14 +1,19 @@
 {% extends "shoppers/base.html" %}
 
 {% block header %}
+<style>
+.heading {
+  font-size: 2em;
+}
+</style>
 {% endblock %}
 
 {% block content %}
-  <div class=container>
-    <form method="post">
-      {% csrf_token %}
-      <div class=background-check-info>OK to run background check for user {{ email }}?<div>
-      <input class="btn btn-primary" type="submit" value="OK">
-    </form>
-  </div>
+  <form method="post">
+  {% csrf_token %}
+    <div class=heading>Welcome {{ name }}.</div>
+    <div>You're almost done!</div>
+    <div class=main>We need your permission to run a background check.  By clicking on the button below you are giving us permission to run a background check.</div>
+    <input class="btn btn-primary" type="submit" value="OK" />
+  </form>
 {% endblock %}

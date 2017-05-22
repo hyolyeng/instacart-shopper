@@ -1,16 +1,41 @@
 {% extends "shoppers/base.html" %}
 
 {% block header %}
+<style>
+.container-box div {
+  padding: 10px;
+}
+
+.welcome {
+  font-size: 2em;
+}
+.logo > img {
+  width: 80%;
+}
+
+input.email {
+  border: 1px solid #E0E0E0;
+  border-radius: 3px;
+  font-size: 1.5em;
+  line-height: 2;
+  user-select: text;
+  width: 70%;
+  text-align: center;
+}
+
+.btn {
+  font-size: 1.5em;
+}
+
+</style>
 {% endblock %}
 
 {% block content %}
-  <div class=container>
-    <form method="post">
-      {% csrf_token %}
+  <form method="post">
+    {% csrf_token %}
       <div class=welcome>Welcome Shopper!</div>
-      <div class=subtitle>Sign up to be a shopper now!</div>
-      <input type=email name=email required>
-      <input class="btn btn-primary" type="submit" value="Apply Now">
-    </form>
-  </div>
+      <div class=subtitle>Apply to be a shopper now!</div>
+      <div class=input><input class=email type=email name=email placeholder="Email" required></div>
+      <div><input class="btn btn-primary" type="submit" value="Apply Now"></div>
+  </form>
 {% endblock %}

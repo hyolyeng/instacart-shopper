@@ -1,13 +1,18 @@
 {% extends "shoppers/base.html" %}
 
 {% block header %}
+<style>
+.container-box {
+	width: 80%;
+}
+</style>
 {% endblock %}
 
 {% block content %}
-    <h1>Application Status<h1>
-    {{ application.email }}
-    {{ application.name }}
-    {{ application.phone }}
-    {{ application.zipcode }}
-    {{ application.step }}
+	<div>
+		<h1>Thank you for applying!</h1>
+		<div class=application-table>
+			<div class=application-row>{{application.email}}</div>
+			<div class=status>Status: {{status}}</div>
+		</div>
 {% endblock %}
