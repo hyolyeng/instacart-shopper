@@ -23,6 +23,10 @@ class Application(models.Model):
     (7, 'rejected'))
   step = models.IntegerField(choices=APPLICATION_STEPS, default=1)
 
+  @staticmethod
+  def step_str(step):
+    return [s for s in Application.APPLICATION_STEPS if s[0] == step][0][1]
+
 class ApplicationForm(forms.ModelForm):
   class Meta:
     model = Application

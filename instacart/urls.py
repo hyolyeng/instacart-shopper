@@ -24,4 +24,5 @@ urlpatterns = [
     url(r'^shoppers/application_status/(?P<id>\d+)/$', shoppers.views.application_status, name='application_status'),
     url(r'^shoppers/application', shoppers.views.application, name='application'),
     url(r'^shoppers/background_check', shoppers.views.background_check, name='background_check'),
+    url(r'^shoppers/funnel$', shoppers.views.applicant_analysis, name='applicant_analysis'),
 ]
