@@ -16,7 +16,8 @@ def application(request):
 			return redirect('background_check')
 	else:
 		form = ApplicationForm()
-		return render(request, 'shoppers/application.html', {'form': form, 'email': request.session['email']})
+		
+	return render(request, 'shoppers/application.html', {'form': form, 'email': request.session['email']})
 
 
 def background_check(request):

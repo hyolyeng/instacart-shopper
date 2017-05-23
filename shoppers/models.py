@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 from django.db import models
 from django.utils import timezone
 from django import forms
+from django.core.validators import RegexValidator
 
 class Application(models.Model):
   id = models.AutoField(primary_key=True)
@@ -10,8 +11,12 @@ class Application(models.Model):
   name = models.CharField(max_length=100)
   email = models.EmailField(max_length=100, unique=True)
   created_dt = models.DateField(default=timezone.now)
-  phone = models.CharField(max_length=10)
-  zipcode = models.CharField(max_length=10)
+  
+  phone_regex = RegexValidator(regex=r'^\d{9,15}$', message="Phone number must contain only digits, of length 9-15")
+  phone = models.CharField(validators=[phone_regex], max_length=16)
+  
+  zip_regex = RegexValidator(regex=r'^\d{5}$', message="Zip code should be 5 digits. eg. 94085")
+  zipcode = models.CharField(validators=[zip_regex], max_length=10)
 
   APPLICATION_STEPS = (
     (1, 'applied'),
