@@ -66,17 +66,6 @@ def index(request):
 	else:
 		return render(request, "shoppers/index.html")
 
-def fill_with_fake_data():
-	for i in xrange(100):
-		random_date = random.randint(20, 31)
-		ct = datetime.datetime.now().replace(day=random_date).replace(year=2016).replace(month=12)
-		Application(email="hyolyeng-b%d@gmail.com" % i,
-								name="diana",
-								created_dt=ct,
-								phone="5103098555",
-								zipcode="94115",
-								step=random.randint(1, 7)).save()
-
 
 def _convert_data_to_funnel(data):
 	# Create a funnel from the buckets of data.
