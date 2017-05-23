@@ -8,6 +8,9 @@ from .models import Application, ApplicationForm
 from django.db.models.functions import ExtractYear, ExtractWeek, ExtractMonth
 
 def application(request):
+	if not request.session.get('email'):
+		return redirect('index')
+
 	if request.method == "POST":
 		form = ApplicationForm(request.POST)
 		if form.is_valid():
@@ -16,11 +19,14 @@ def application(request):
 			return redirect('background_check')
 	else:
 		form = ApplicationForm()
-		
+
 	return render(request, 'shoppers/application.html', {'form': form, 'email': request.session['email']})
 
 
 def background_check(request):
+	if not request.session.get('email'):
+		return redirect('index')
+
 	if request.method == "POST":
 		application = Application(email=request.session['email'], name=request.session['name'],
 				phone=request.session['phone'], zipcode=request.session['zipcode'])
@@ -38,19 +44,22 @@ def background_check(request):
 				{'email': request.session['email'], 'name': request.session['name']})
 
 
-def application_status(request, id):
+def application_status(request, id, new_application=True):
 	application = Application.objects.get(id=id)
 	status_str = Application.step_str(application.step)
-	return render(request, "shoppers/application_status.html", {'application': application, 'status': status_str})
+	return render(request, "shoppers/application_status.html", 
+		{'application': application, 'status': status_str, 'existing_application': request.session.get('existing_application')})
 
 
 def index(request):
+	request.session.pop('existing_application', None)
 	if request.method == "POST":
 		email = request.POST['email']
 		request.session['email'] = email
 		application = Application.objects.filter(email=email)
 		if application:
 			application = application[0]
+			request.session['existing_application'] = True
 			return redirect('application_status', id=application.id)
 		else:
 			return redirect('application')

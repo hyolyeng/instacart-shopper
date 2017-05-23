@@ -5,6 +5,9 @@
 .heading {
   font-size: 2em;
 }
+.main {
+  padding: 10px 10px 20px 10px;
+}
 </style>
 {% endblock %}
 
@@ -13,7 +16,7 @@
   {% csrf_token %}
     <div class=heading>Welcome {{ name }}.</div>
     <div>You're almost done!</div>
-    <div class=main>We need your permission to run a background check.  By clicking on the button below you are giving us permission to run a background check.</div>
-    <input class="btn btn-primary" type="submit" value="OK" />
+    <div class=main>We need your permission to run a background check. <br> By clicking on the button below you are giving us permission to run a background check.</div>
+    <input class="btn btn-primary" type="submit" value="Yes I give permission" />
   </form>
 {% endblock %}

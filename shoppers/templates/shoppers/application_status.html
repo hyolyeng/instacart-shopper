@@ -10,9 +10,13 @@
 
 {% block content %}
 	<div>
+	{% if existing_application %}
+		<h1>You're already applied!</h1>
+	{% else %}
 		<h1>Thank you for applying!</h1>
+	{% endif %}
 		<div class=application-table>
-			<div class=application-row>{{application.email}}</div>
+			<div class=application-row>Email: {{application.email}}</div>
 			<div class=status>Status: {{status}}</div>
 		</div>
 {% endblock %}
