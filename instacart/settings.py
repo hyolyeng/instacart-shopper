@@ -26,9 +26,7 @@ SECRET_KEY = 'u5!6-mj^4#6)c!4%^%__ja3t30ywbez3j!2=*qatmjli=^m49*'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['peaceful-shelf-75383.herokuapp.com']
-# ALLOWED_HOSTS = ['198.211.99.20', 'localhost', '127.0.0.1']
-
+ALLOWED_HOSTS = ['peaceful-shelf-75383.herokuapp.com', '198.211.99.20', 'localhost', '127.0.0.1']
 
 # Application definition
 

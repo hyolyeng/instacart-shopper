@@ -1,7 +1,7 @@
 import datetime
 import random
 import simplejson
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseBadRequest
 from django.shortcuts import render, redirect
 from .models import Application, ApplicationForm
 
@@ -85,8 +85,14 @@ def _convert_data_to_funnel(data):
 
 
 def applicant_analysis(request):
-	from_dt = datetime.datetime.strptime(request.GET['from'], "%Y-%m-%d").date()
-	to_dt = datetime.datetime.strptime(request.GET['to'], "%Y-%m-%d").date()
+	try:
+		from_dt = datetime.datetime.strptime(request.GET.get('from', ''), "%Y-%m-%d").date()
+		to_dt = datetime.datetime.strptime(request.GET.get('to', ''), "%Y-%m-%d").date()
+	except ValueError:
+		return HttpResponseBadRequest()
+	if not from_dt or not to_dt:
+		return HttpResponseBadRequest()
+
 	applications = Application.objects \
 			.filter(created_dt__gte=from_dt, created_dt__lte=to_dt) \
 			.annotate(week=ExtractWeek('created_dt'), year=ExtractYear('created_dt'), month=ExtractMonth('created_dt')) \
